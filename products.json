@@ -51,8 +51,7 @@
       "price": 40
     }
   ],
-  "totalItems": 0,
-  "totalPrice": 0,
-  "averagePrice": 0,
-  "quantity": 0
+  "totalItems": 10,
+  "totalPrice": 276,
+  "averagePrice": 27.6
 }

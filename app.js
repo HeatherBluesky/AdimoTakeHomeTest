@@ -13,34 +13,26 @@ axios.get('https://cdn.adimo.co/clients/Adimo/test/index.html')
     // Initialize data object
     const data = {
       products: [],
-      totalItems: 0,
+      totalItems: productElements.length,
       totalPrice: 0,
       averagePrice: 0,
-      quantity: 0
     };
-
+ 
     // Process each product element
     productElements.forEach(productElement => {
       const title = productElement.querySelector('h1').textContent;
       const imageUrl = productElement.querySelector('img').getAttribute('src');
       const price = parseFloat(productElement.querySelector('.price').textContent.replace('£', ''));
-    //   const quantity = parseInt(productElement.querySelector('.quantity').textContent);  
-    //   no quantity on website?
+      data.totalPrice += price;
+      data.averagePrice = data.totalPrice / data.totalItems;      
 
-      
       // Add product to data object
       data.products.push({
         title,
         imageUrl,
-        price
+        price,
       });
     });
-
-    // logic to work out average price 
-    if (data.totalItems > 0) {
-        data.averagePrice = data.totalPrice / data.totalItems;
-      }
-  
 
     // Write data to JSON file
     fs.writeFile('products.json', JSON.stringify(data, null, 2), err => {

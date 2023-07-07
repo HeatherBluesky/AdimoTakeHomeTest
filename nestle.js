@@ -8,7 +8,7 @@ axios.get('https://www.jjfoodservice.com/search?b&page=0&q=nestle&size=12')
     const document = dom.window.document;
 
     // Get product elements
-    const productElements = document.querySelectorAll('.SearchPagestyle__ResultsWrapper-sc-1c66j3i-8')
+    const productElements = document.querySelectorAll('.ListProductstyle__Container-sc-174m422-1 ntgUN')
 
     console.log("product elements", productElements)
   
@@ -16,18 +16,17 @@ axios.get('https://www.jjfoodservice.com/search?b&page=0&q=nestle&size=12')
     // Initialize data object
     const data = {
       products: [],
-      totalItems: 0,
+      totalItems: productElements.length,
       totalPrice: 0,
       averagePrice: 0
     };
 
     // Process each product element
     productElements.forEach(productElement => {
-      const title = productElement.querySelector('ListProductstyle__Name-sc-174m422-10 geyIok').textContent;
+      const title = productElement.querySelector('.ListProductstyle__Name-sc-174m422-10.geyIok').textContent;
       const imageUrl = productElement.querySelector('.img').getAttribute('src');
-      const price = parseFloat(productElement.querySelector('.span').textContent.replace('£', ''));
+      const price = parseFloat(productElement.querySelector('.ListProductstyle__Larger-sc-174m422-4.gQMxNk').textContent.replace('£', ''));
     
-      
       // Add product to data object
       data.products.push({
         title,
@@ -37,11 +36,11 @@ axios.get('https://www.jjfoodservice.com/search?b&page=0&q=nestle&size=12')
     });
 
     // Write data to JSON file
-    fs.writeFile('products.json', JSON.stringify(data, null, 2), err => {
+    fs.writeFile('nestleProducts.json', JSON.stringify(data, null, 2), err => {
       if (err) {
         console.error('Error writing JSON file:', err);
       } else {
-        console.log('Data written to products.json file');
+        console.log('Data written to nestleProducts.json file');
       }
     });
   })

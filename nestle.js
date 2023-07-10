@@ -8,7 +8,7 @@ axios.get('https://www.jjfoodservice.com/search?b&page=0&q=nestle&size=12',)
     const document = dom.window.document;
 
     // Get product elements
-    const productElements = document.querySelectorAll('.SearchPagestyle__ResultsWrapper-sc-1c66j3i-8 glecnj')
+    const productElements = document.querySelectorAll('.Productstyle__Container-sc-1ssfvqo-0 ZNdqy')
 
     console.log("product elements", productElements)
   
@@ -23,9 +23,14 @@ axios.get('https://www.jjfoodservice.com/search?b&page=0&q=nestle&size=12',)
 
     // Process each product element
     productElements.forEach(productElement => {
-      const title = productElement.querySelector("a.Productstyle__Name-sc-1ssfvqo-9").textContent()
-      const imageUrl = productElement.querySelector('img.Imagestyle__Img-sc-1o9v7pr-0').getAttribute('src');
-      const price = parseFloat(productElement.querySelector('div.Productstyle__PriceText-sc-1ssfvqo-33').textContent.replace('£', ''));
+      const titleElement = productElement.querySelector("a.Productstyle__Name-sc-1ssfvqo-9.gyYGTV");
+      const title = titleElement ? titleElement.textContent : '';
+    
+      const imageElement = productElement.querySelector('img.Imagestyle__Img-sc-1o9v7pr-0');
+      const imageUrl = imageElement ? imageElement.getAttribute('src') : '';
+    
+      const priceElement = productElement.querySelector('div.Productstyle__PriceText-sc-1ssfvqo-33');
+      const price = priceElement ? parseFloat(priceElement.textContent.replace('£', '')) : 0;
     
       // Add product to data object
       data.products.push({

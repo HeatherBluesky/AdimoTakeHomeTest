@@ -1,6 +1,12 @@
 {
-  "products": [],
-  "totalItems": 0,
+  "products": [
+    {
+      "title": "unable to find item",
+      "imageUrl": "unable to find image",
+      "price": 0
+    }
+  ],
+  "totalItems": 1,
   "totalPrice": 0,
   "averagePrice": 0
 }

@@ -16,6 +16,8 @@ axios.get('https://cdn.adimo.co/clients/Adimo/test/index.html')
       totalItems: productElements.length,
       totalPrice: 0,
       averagePrice: 0,
+      oldPrice: 0,
+      savings: 0,
     };
  
     // Process each product element
@@ -24,13 +26,18 @@ axios.get('https://cdn.adimo.co/clients/Adimo/test/index.html')
       const imageUrl = productElement.querySelector('img').getAttribute('src');
       const price = parseFloat(productElement.querySelector('.price').textContent.replace('£', ''));
       data.totalPrice += price;
-      data.averagePrice = data.totalPrice / data.totalItems;      
+      data.averagePrice = data.totalPrice / data.totalItems;     
+      const priceElement = productElement.querySelector('.oldPrice');
+      const oldPrice = priceElement ? parseFloat(priceElement.textContent.replace('£', '')) : price ;
+     const savings = oldPrice - price;
 
       // Add product to data object
       data.products.push({
         title,
         imageUrl,
-        price,
+        price,  
+        oldPrice,
+        savings,
       });
     });
 
